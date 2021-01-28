@@ -6,9 +6,13 @@ import NewBoxForm from './NewBoxForm'
 const BoxList = () => {
     const [boxes, setBoxes] = useState([])
 
+    const addBox = (box) => {
+        setBoxes(boxes => [...boxes, {...box}])
+    }
+
     return (
         <div>
-        <NewBoxForm/>
+        <NewBoxForm addBox={addBox}/>
         {boxes.map(b => <Box backgroundColor={b.backgroundColor} width={b.width} height={b.height}/>)}   
         </div>
         

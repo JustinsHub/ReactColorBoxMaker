@@ -1,21 +1,28 @@
 import React, {useState} from 'react'
 
-const NewBoxForm = () => {
+const NewBoxForm = ({addBox}) => {
     const INITIAL_STATE = {
         backgroundColor: "",
-        width: Number,
-        height: Number
+        width: "",
+        height: ""
     }
     const [formData, setFormData] = useState(INITIAL_STATE)
 
     const handleChange = (e) =>{
         const {name, value} = e.target
         setFormData(formData => ({...formData, [name]:value}))
+        // console.log(`Our [name] key: ${name}, our value changes: ${value}`)
+    }
+
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        addBox({...formData})
+        setFormData(INITIAL_STATE)
     }
     
     return (
         <div className="NewBoxForm">
-            <form>
+            <form onSubmit={handleSubmit}>
                 <div>
                 <label htmlFor="backgroundColor">Background Color:</label>
                 <input 
@@ -48,6 +55,9 @@ const NewBoxForm = () => {
                 value={formData.height}
                 onChange={handleChange}
                 />
+                </div>
+                <div>
+                    <button>Create Box</button>
                 </div>
             </form>
         </div>
